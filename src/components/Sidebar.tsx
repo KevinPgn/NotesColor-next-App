@@ -1,4 +1,4 @@
-import { AddNotes } from "./AddNotes"
+import { AddNotes } from "./ui/button/ButtonAdd"
 import { getNotesColor } from "@/server/Actions"
 import { GetColors } from "./GetColors"
 

@@ -1,12 +1,12 @@
-'use client'
-import { Plus } from "lucide-react"
-import { useState } from "react"
-import { Button } from "./ui/button"
+"use client"
 import { addNotes } from "@/server/Actions"
+import { Button } from "./ui/button"
+import { useNoteStore } from "@/lib/store"
 
-export const AddNotes = () => {
-  const [modal, setModal] = useState(false)
-  
+export const ModalAdd = () => {
+  const setModalAdd = useNoteStore((state) => state.setModalAdd)
+  const modalAdd = useNoteStore((state) => state.modalAdd)
+
   const handleAction = (form: FormData) => {
     const title = form.get("title") as string
     const content = form.get("content") as string
@@ -18,21 +18,15 @@ export const AddNotes = () => {
 
     try {
       addNotes(form)
-      setModal(false)
+      setModalAdd(false)
     } catch (error) {
       console.error(error)
     }
   }
-
+  
   return <>
-  <div 
-  onClick={() => setModal(true)}
-  className="mt-5 mb-10 cursor-pointer bg-slate-800 p-3 rounded-full text-white font-bold">
-      <Plus size={26} />
-  </div>
-
-    {modal && (
-    <div onClick={() => setModal(false)} className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+     {modalAdd && (
+      <div onClick={() => setModalAdd(false)} className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
       <div onClick={e => e.stopPropagation()} className="w-1/2 bg-slate-800 p-5 rounded-lg">
         <h1 className="text-white font-bold text-2xl">Add Notes</h1>
         <form className="mt-5 flex flex-col gap-5" action={handleAction}>
