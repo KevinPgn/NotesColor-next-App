@@ -39,3 +39,17 @@ export async function getNotesColor(){
 
   return colors
 }
+
+export async function getNotes(){
+  const notes = await prisma.notes.findMany({
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      color: true,
+      createdAt: true
+    }
+  })
+
+  return notes
+}
