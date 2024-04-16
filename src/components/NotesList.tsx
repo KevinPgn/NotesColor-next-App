@@ -1,8 +1,14 @@
 "use client"
+import { useNoteStore } from "@/lib/store"
 import { Edit } from "lucide-react"
 
 export const NotesList = ({notes}: any) => {
-  
+  const filterByColors = useNoteStore((state) => state.filterByColors)
+
+  if (filterByColors && filterByColors !== "no filter") {
+    notes = notes.filter((note: any) => note.color === filterByColors)
+  }
+
   return <>
     <div className="flex relative flex-wrap mt-10 gap-10 justify-center p-3">
       {notes.map((note: any) => (
