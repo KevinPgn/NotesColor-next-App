@@ -1,4 +1,5 @@
 "use client"
+import { useNoteStore } from "@/lib/store"
 import {
   Select,
   SelectContent,
@@ -8,25 +9,20 @@ import {
   SelectLabel,
   SelectValue,
 } from "@/components/ui/select"
-import { useNoteStore } from "@/lib/store"
 
-export const SelectColor = () => {
+export const SelectExistingColors = ({setColorDefault}: any) => {
   const colorsZustand = useNoteStore((state) => state.colorsZustand).map((color:any) => color.color).filter((value, index, self) => self.indexOf(value) === index)
-  const setFilterByColors = useNoteStore((state) => state.setFilterByColors)
-  
+
   return <>
     <Select
-      onValueChange={(value) => setFilterByColors(value)}
+    onValueChange={(value) => setColorDefault(value)}
     >
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Filter by color" />
+        <SelectValue placeholder="Select color" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Color</SelectLabel>
-          <SelectItem className="cursor-pointer mb-2" value="no filter" key="all">
-            No filter
-          </SelectItem>
           {colorsZustand.map((color: any) => (
             <SelectItem className="cursor-pointer mb-2" style={{backgroundColor: color}}
               key={color}
