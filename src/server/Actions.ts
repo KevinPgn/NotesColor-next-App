@@ -48,7 +48,8 @@ export async function getNotes(){
       title: true,
       content: true,
       color: true,
-      createdAt: true
+      createdAt: true,
+      archived: true
     }
   })
 
@@ -95,6 +96,22 @@ export async function updateNotes(id: string, formData: FormData){
     data: {
       title: note.title,
       content: note.content,
+    }
+  })
+
+  revalidatePath("/")
+  redirect("/")
+}
+
+/* archived */
+
+export async function archivedNotes(id: string){
+  await prisma.notes.update({
+    where: {
+      id
+    },
+    data: {
+      archived: true
     }
   })
 

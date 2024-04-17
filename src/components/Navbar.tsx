@@ -14,7 +14,7 @@ export const Navbar = () => {
           <Link href="/">Home</Link>
           <SelectColor />
           <SelectDate />
-          <Link href="/archive">Archive</Link>
+          <Link href="/archived">Archived</Link>
         </div>
         
         <InputSearch />

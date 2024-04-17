@@ -1,6 +1,7 @@
 "use client"
 import { useNoteStore } from "@/lib/store"
 import { updateNotes } from "@/server/Actions"
+import { ButtonArchived } from "./ui/button/ButtonArchived"
 
 export const EditNote = ({note}: any) => {  
   const colorsZustand = useNoteStore((state) => state.colorsZustand).map((color: any) => color.color).filter((color: any, index: any, self: any) => self.indexOf(color) === index)
@@ -35,6 +36,7 @@ export const EditNote = ({note}: any) => {
               <textarea defaultValue={note.content} name="content" className="border border-gray-200 p-2 rounded-lg mt-5"></textarea>
               <button className="bg-blue-500 text-white w-40 p-2 rounded-lg mt-5">Save</button>
             </form>
+            <ButtonArchived id={note.id}/>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center mt-10">
