@@ -6,9 +6,14 @@ import { useRouter } from "next/navigation"
 export const NotesList = ({notes}: any) => {
   const router = useRouter()
   const filterByColors = useNoteStore((state) => state.filterByColors)
+  const search =  useNoteStore((state) => state.searchFilter)
 
   if (filterByColors && filterByColors !== "no filter") {
     notes = notes.filter((note: any) => note.color === filterByColors)
+  }
+
+  if (search) {
+    notes = notes.filter((note: any) => note.title.toLowerCase().startsWith(search.toLowerCase()))
   }
 
   return <>
