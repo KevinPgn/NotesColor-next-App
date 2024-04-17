@@ -1,8 +1,12 @@
 import React from 'react'
+import { getNotes } from '@/server/Actions'
+import { Archived } from '@/components/Archived'
 
-const ArchivedList = () => {
+const ArchivedList = async () => {
+  const notes = await getNotes()
+ 
   return (
-    <div>Archived</div>
+    <Archived notes={notes} />
   )
 }
 
