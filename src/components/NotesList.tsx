@@ -1,8 +1,10 @@
 "use client"
 import { useNoteStore } from "@/lib/store"
 import { Edit } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export const NotesList = ({notes}: any) => {
+  const router = useRouter()
   const filterByColors = useNoteStore((state) => state.filterByColors)
 
   if (filterByColors && filterByColors !== "no filter") {
@@ -22,7 +24,9 @@ export const NotesList = ({notes}: any) => {
 
           <div className="flex absolute bottom-0 w-full items-center justify-between p-5">
             {note.createdAt.toLocaleString()}
-            <Edit className="cursor-pointer" size={24} />
+            <Edit 
+            onClick={() => router.push(`/notes/${note.id}`)}
+            className="cursor-pointer" size={24} />
           </div>
         </div>
       ))}
